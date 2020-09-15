@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.training.coroutinepackdemo.R
 import com.training.coroutinepackdemo.data.api.ApiHelperImpl
 import com.training.coroutinepackdemo.data.api.RequestBuilder
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_news_main.*
 class NewsActivity : AppCompatActivity() {
 
     private lateinit var newsListViewModel: NewsListViewModel
-    private lateinit var adapter: NewsAdapter
+    private lateinit var newsAdapter: NewsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +35,22 @@ class NewsActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = NewsAdapter(arrayListOf())
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                recyclerView.context,
-                (recyclerView.layoutManager as LinearLayoutManager).orientation
-            )
-        )
-        recyclerView.adapter = adapter
+        newsAdapter= NewsAdapter(arrayListOf())
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = newsAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    layoutManager?.run {
+                        if (this is LinearLayoutManager
+                            && itemCount > 0
+                            && itemCount == findLastVisibleItemPosition() + 1
+                        ) newsListViewModel.onLoadMore()
+                    }
+                }
+            })
+        }
     }
 
     private fun setupObserver() {
@@ -61,15 +68,16 @@ class NewsActivity : AppCompatActivity() {
                 Status.ERROR -> {
                     //Handle Error
                     progressbar.visibility = View.GONE
-                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                    recyclerView.visibility = View.VISIBLE
+                    Toast.makeText(this, "Something went wrong,please try again", Toast.LENGTH_LONG).show()
                 }
             }
         })
     }
 
     private fun renderList(newsList: List<NewsEntity>) {
-        adapter.addData(newsList)
-        adapter.notifyDataSetChanged()
+        newsAdapter.addData(newsList)
+        newsAdapter.notifyDataSetChanged()
     }
 
     private fun setupViewModel() {
