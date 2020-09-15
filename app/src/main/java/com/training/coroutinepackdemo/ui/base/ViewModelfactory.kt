@@ -12,7 +12,7 @@ import java.lang.IllegalArgumentException
 class ViewModelfactory(private  val apiHelper: ApiHelper,private val networkHelper: NetworkHelper, private val databaseHelper: NewsDaoImpl): ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(NewsListViewModel::class.java)){
-            return  NewsListViewModel(NewsListRepositoryImpl(apiHelper,networkHelper,databaseHelper),databaseHelper) as T
+            return  NewsListViewModel(NewsListRepositoryImpl(apiHelper,networkHelper,databaseHelper),databaseHelper,networkHelper) as T
         }else{
             throw IllegalArgumentException("Unknown class exception")
         }
