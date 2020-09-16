@@ -44,7 +44,7 @@ class NewsListViewModel(
                 }
 
             }catch (e:Exception){
-                newsList.postValue(Resource.error(msg = "Something went wrong,Please try again",data = null))
+                newsList.postValue(Resource.error(msg = e.toString(),data = null))
             }
         }
     }
