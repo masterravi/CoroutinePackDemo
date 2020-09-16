@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RequestBuilder{
 
-    private const val BASE_URL = "https://demo1985203.mockable.io/"
+    private const val BASE_URL = "https://newsapi.org/v2/"
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
