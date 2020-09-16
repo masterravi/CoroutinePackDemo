@@ -10,7 +10,7 @@ import com.training.coroutinepackdemo.data.local.entity.NewsEntity
         NewsEntity::class
     ],
     exportSchema = false,
-    version = 3
+    version = 4
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun newsDao(): NewsDao
