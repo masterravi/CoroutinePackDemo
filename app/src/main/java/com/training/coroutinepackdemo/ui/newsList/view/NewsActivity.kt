@@ -63,13 +63,12 @@ class NewsActivity : AppCompatActivity() {
                 }
                 Status.LOADING -> {
                     progressbar.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
                 }
                 Status.ERROR -> {
                     //Handle Error
                     progressbar.visibility = View.GONE
                     recyclerView.visibility = View.VISIBLE
-                    Toast.makeText(this, "Something went wrong,please try again", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
             }
         })
