@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.training.coroutinepackdemo.R
 import com.training.coroutinepackdemo.data.local.entity.NewsEntity
 import kotlinx.android.synthetic.main.item_layout.view.*
@@ -21,8 +23,13 @@ class NewsAdapter(
             itemView.textViewDescription.text = news.description
             itemView.textViewSource.text = news.source
             Glide.with(itemView.imageViewBannner.context)
-                .load(news.imageUrl)
+                .load(news.urlToImage)
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .priority(Priority.HIGH)
                 .into(itemView.imageViewBannner)
+
             itemView.setOnClickListener {
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
