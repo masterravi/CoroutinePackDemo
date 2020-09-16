@@ -20,9 +20,8 @@ data class NewsEntity(
     @ColumnInfo(name = "description")
     val description: String?=null,
 
-    @ColumnInfo(name = "imageUrl")
-
-    val imageUrl: String?=null,
+    @ColumnInfo(name = "urlToImage")
+    val urlToImage: String?=null,
 
     @ColumnInfo(name = "source")
     val source: String?=null,
