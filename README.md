@@ -1,5 +1,5 @@
 
-# Kotlin-Coroutines-MVVM-Demo - Learn Kotlin Coroutines for Android with MVVM Architecture
+# Kotlin-Coroutines-MVVM-Demo - Kotlin Coroutines for Android with MVVM Architecture
 
 ## About this project: 
 * If you want to ho ahead with complete android project with coroutines instead of RxJava and wants to master it, then this project will help you alot.
