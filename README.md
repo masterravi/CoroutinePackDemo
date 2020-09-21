@@ -7,9 +7,6 @@
 * Also, learn to write Unit-Test for ViewModel which uses Kotlin Coroutines.
 * This is your one-stop solution for learning Kotlin Coroutines for Android Development.
 
-## Steps to learn Kotlin Coroutines by examples from this project
-* First, learn the concepts of Kotlin Coroutines from this **[blog](https://blog.mindorks.com/mastering-kotlin-coroutines-in-android-step-by-step-guide)**
-* Then, just clone, build, run the project and start learning Kotlin Coroutines by examples.
 
 ## This demo will help you in learning the following
 * Kotlin Coroutines?
